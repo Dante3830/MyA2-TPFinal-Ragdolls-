@@ -85,7 +85,7 @@ Ragdoll::Ragdoll(Vector2f pos, b2World& World) {
 
 }
 
-float Ragdoll::rad2deg(float radians) {
+float Ragdoll::Rad2Deg(float radians) {
 	return radians * 180 / 3.1415;
 }
 
@@ -95,7 +95,7 @@ void Ragdoll::Draw(RenderWindow* _window) {
 	}
 }
 
-void Ragdoll::applyForce(Vector2f _mousePos) {
+void Ragdoll::ApplyForce(Vector2f _mousePos) {
 	for (int i = 0; i < 6; i++) {
 		bdy_rag[i]->ApplyForceToCenter(b2Vec2(_mousePos.x * 10, _mousePos.y * 10), false);
 	}
