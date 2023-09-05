@@ -192,7 +192,7 @@ void Game::UpdateRagdoll() {
 
 		if (ragdolls < 5) {
 			RagdollNumber[ragdolls] = new Ragdoll({ bdy_canyon->GetPosition().x + 0.5f, bdy_canyon->GetPosition().y - 2.f }, *World);
-			RagdollNumber[ragdolls]->applyForce({ mousePosCoord.x - bdy_canyon->GetPosition().x, mousePosCoord.y - bdy_canyon->GetPosition().y });
+			RagdollNumber[ragdolls]->ApplyForce({ mousePosCoord.x - bdy_canyon->GetPosition().x, mousePosCoord.y - bdy_canyon->GetPosition().y });
 			ragdolls++;
 		}
 
