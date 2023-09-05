@@ -6,7 +6,7 @@ using namespace std;
 
 enum EnumRagdoll{ground, canyon, dynamicBox, stoppedBox};
 
-class Ragdoll {
+class Object {
 private:
 	// Objetos del ragdoll
 	b2Body* bdy_ragdoll;
@@ -20,7 +20,7 @@ private:
 
 public:
 	// Constructor de la clase
-	Ragdoll(b2Body* _body, RectangleShape* _figure);
+	Object(b2Body* _body, RectangleShape* _figure);
 
 	// Dibuja todas las partes del cuerpo del ragdoll
 	void Draw(RenderWindow* window);
