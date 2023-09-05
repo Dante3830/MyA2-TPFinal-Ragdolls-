@@ -9,11 +9,11 @@
 using namespace sf;
 using namespace std;
 
-class Clone {
+class Ragdoll {
 private:
 	// Definiendo al ragdoll y sus partes
 	RectangleShape* shape_rag[6];
-	Ragdoll* ragd[6];
+	Object* ragd[6];
 
 	// Definiendo al cuerpo y fixture del ragdoll
 	b2Body* bdy_rag[6];
@@ -27,7 +27,7 @@ private:
 
 public:
 	// Constructor
-	Clone(Vector2f pos, b2World& phyWorld);
+	Ragdoll(Vector2f pos, b2World& phyWorld);
 
 	// Dibuja el objeto ragdoll
 	void Draw(RenderWindow* wnd);
