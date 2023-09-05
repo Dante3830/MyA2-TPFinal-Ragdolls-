@@ -1,6 +1,6 @@
 #include "Object.h"
 
-Ragdoll::Ragdoll(b2Body* _body, RectangleShape* _figure): bdy_ragdoll(_body), fig_ragdoll(_figure) 
+Object::Object(b2Body* _body, RectangleShape* _figure): bdy_ragdoll(_body), fig_ragdoll(_figure) 
 {
 	pos = _body->GetPosition();
 
@@ -17,18 +17,18 @@ Ragdoll::Ragdoll(b2Body* _body, RectangleShape* _figure): bdy_ragdoll(_body), fi
 	fig_ragdoll->setRotation(rad2deg(bdy_ragdoll->GetAngle()));
 }
 
-void Ragdoll::Draw(RenderWindow* window) {
+void Object::Draw(RenderWindow* window) {
 	pos = bdy_ragdoll->GetPosition();
 	fig_ragdoll->setPosition(pos.x, pos.y);
 	fig_ragdoll->setRotation(rad2deg(bdy_ragdoll->GetAngle()));
 	window->draw(*fig_ragdoll);
 }
 
-FloatRect Ragdoll::BoxRagdoll() {
+FloatRect Object::BoxRagdoll() {
 	FloatRect boundingBox = fig_ragdoll->getGlobalBounds();
 	return boundingBox;
 }
 
-float Ragdoll::rad2deg(float rads) {
+float Object::rad2deg(float rads) {
 	return rads * 180 / 3.1415f;
 }
