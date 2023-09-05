@@ -116,8 +116,8 @@ private:
 	// Activa si hay ragdoll o no
 	bool Ragdoll_On;
 
-	//ragdolls
-	Clone* RagdollNumber[5];
+	// Ragdolls
+	Ragdoll* RagdollNumber[5];
 
 	bool collission;
 
