@@ -1,6 +1,6 @@
 #include "Ragdoll.h"
 
-Clone::Clone(Vector2f pos, b2World& World) {
+Ragdoll::Ragdoll(Vector2f pos, b2World& World) {
 
 	b2PolygonShape shp_rag[6];
 
@@ -80,22 +80,22 @@ Clone::Clone(Vector2f pos, b2World& World) {
 	shape_rag[5]->setFillColor(Color::Blue);
 
 	for (int i = 0; i < 6; i++) {
-		ragd[i] = new Ragdoll(bdy_rag[i], shape_rag[i]);
+		ragd[i] = new Object(bdy_rag[i], shape_rag[i]);
 	}
 
 }
 
-float Clone::rad2deg(float radians) {
+float Ragdoll::rad2deg(float radians) {
 	return radians * 180 / 3.1415;
 }
 
-void Clone::Draw(RenderWindow* _window) {
+void Ragdoll::Draw(RenderWindow* _window) {
 	for (int i = 0; i < 6; i++) {
 		ragd[i]->Draw(_window);
 	}
 }
 
-void Clone::applyForce(Vector2f _mousePos) {
+void Ragdoll::applyForce(Vector2f _mousePos) {
 	for (int i = 0; i < 6; i++) {
 		bdy_rag[i]->ApplyForceToCenter(b2Vec2(_mousePos.x * 10, _mousePos.y * 10), false);
 	}
@@ -109,12 +109,12 @@ void Clone::applyForce(Vector2f _mousePos) {
 //	return CloneBounds;
 //}
 
-Vector2f Clone::GetPosition(int i) {
+Vector2f Ragdoll::GetPosition(int i) {
 	b2Vec2 ClonePos = bdy_rag[i]->GetPosition();
 	return Vector2f(ClonePos.x, ClonePos.y);
 }
 
-Vector2f Clone::GetSize(int i) const {
+Vector2f Ragdoll::GetSize(int i) const {
 	b2PolygonShape* shape = static_cast<b2PolygonShape*>(fix_rag[i]->GetShape());
 	b2Vec2 size = shape->m_vertices[2] - shape->m_vertices[0];
 	return Vector2f(size.x, size.y);
