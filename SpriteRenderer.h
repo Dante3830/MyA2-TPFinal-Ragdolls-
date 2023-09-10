@@ -7,11 +7,11 @@ using namespace std;
 class SpriteRenderer {
 private:
 	// Define los objetos
-	b2Body* bdy_object;
-	Sprite* spr_object;
+	b2Body* Bdy_Object;
+	Sprite* Spr_Object;
 
 	// Dimensiones
-	b2AABB dims;
+	b2AABB Dims;
 
 	// Posicion
 	b2Vec2 SpritePos;
@@ -24,5 +24,5 @@ public:
 	void Draw(RenderWindow* _window);
 
 	// Convierte radianes en grados
-	float rad2deg(float _radianes);
+	float RadToDeg(float _radians);
 };
