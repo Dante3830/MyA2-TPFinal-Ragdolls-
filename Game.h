@@ -10,8 +10,8 @@
 using namespace sf;
 using namespace std;
 
-const float coordenadaX_cajaFija = 50.5f;	//define posición en x de la cajaFija 
-const float coordenadaY_cajaFija = 99.f;	//define posición en y de la cajaFija 
+const float coordenateX_stoppedBox = 50.5f;	//define posición en x de la cajaFija 
+const float coordenateY_stoppedBox = 99.f;	//define posición en y de la cajaFija 
 
 class Game {
 private:
@@ -45,53 +45,53 @@ private:
 	float offSetY;
 
 	// Creando los ragdolls
-	Ragdoll* ragd[6];
+	Ragdoll* ragdolls[6];
 
-	int ragdolls;
+	int RagdollCount;
 
 	// Suelo
 	// Creando el suelo
-	b2Body* bdy_ground;
-	b2BodyDef bdygrd_def;
-	b2Fixture* fix_ground;
-	b2FixtureDef fixgrd_def;
+	b2Body* Bdy_Ground;
+	b2BodyDef BdyGrd_Def;
+	b2Fixture* Fix_Ground;
+	b2FixtureDef FixGrd_Def;
 	// Forma del suelo
-	RectangleShape* fig_ground;
+	RectangleShape* Fig_Ground;
 	// Estableciendo suelo
 	Ragdoll* Ground;
 	// Textura y sprite
-	Texture* ground_tex;
-	Sprite* ground_spr;
-	SpriteRenderer* _ground;
+	Texture* Ground_Tex;
+	Sprite* Ground_Spr;
+	SpriteRenderer* _Ground;
 
 	// Cañón
 	// Creando el cañón
-	b2Body* bdy_canyon;
-	b2BodyDef bdycnyn_def;
-	b2Fixture* fix_canyon;
-	b2FixtureDef fixcnyn_def;
+	b2Body* Bdy_Canyon;
+	b2BodyDef BdyCnyn_Def;
+	b2Fixture* Fix_Canyon;
+	b2FixtureDef FixCnyn_Def;
 	// Forma del cañón
-	RectangleShape* fig_canyon;
+	RectangleShape* Fig_Canyon;
 	// Estableciendo cañón
 	Ragdoll* Canyon;
 	// Textura y sprite
-	Texture* canyon_tex;
-	Sprite* canyon_spr;
-	SpriteRenderer* _canyon;
+	Texture* Canyon_Tex;
+	Sprite* Canyon_Spr;
+	SpriteRenderer* _Canyon;
 
 	// Creando la caja de victoria
-	b2Body* bdy_victoryBox;
-	b2BodyDef bdyVicBox_def;
-	b2Fixture* fix_victoryBox;
-	b2FixtureDef fixVicBox_def;
+	b2Body* Bdy_VictoryBox;
+	b2BodyDef BdyVicBox_Def;
+	b2Fixture* Fix_VictoryBox;
+	b2FixtureDef FixVicBox_Def;
 	// Forma de las cajas fijas
 	Ragdoll* VictoryBox;
 	// Estableciendo cajas fijas
-	RectangleShape* fig_victoryBox;
+	RectangleShape* Fig_VictoryBox;
 	// Textura y sprite
-	Texture* VictoryBox_tex;
-	Sprite* VictoryBox_spr;
-	SpriteRenderer* _victoryBox;
+	Texture* VictoryBox_Tex;
+	Sprite* VictoryBox_Spr;
+	SpriteRenderer* _VictoryBox;
 	
 	/*
 	// Cajas dinámicas/fijas
@@ -114,18 +114,18 @@ private:
 	int floorBoxes;*/
 
 	// Activa si hay ragdoll o no
-	bool Ragdoll_On;
+	bool RagdollOn;
 
 	// Ragdolls
 	Ragdoll* RagdollNumber[5];
 
-	bool collission;
+	bool Collission;
 
 public:
 	// Constructor
 	Game(int _width, int _height, string _title);
 
-	//
+	// Inicia el juego
 	void InitGame();
 
 	// Inicia los elementos del juego
@@ -144,10 +144,10 @@ public:
 	void Loop();
 
 	// Controla la variable 
-	void gameStateCond();
+	void GameState();
 
 	// Procesa cosas del menú
-	void Conditions();
+	void CheckWinningCondition();
 
 	// Procesa los eventos externos
 	void DoEvents();
@@ -155,7 +155,7 @@ public:
 	// Controla movimiento del arma
 	void UpdateCanyon();
 
-	// Controla cantidad de ragdoll disparados
+	// Controla cantidad de ragdolls disparados
 	void UpdateRagdoll();
 
 	// Actualiza las físicas
@@ -174,5 +174,5 @@ public:
 	void DrawTheGame();
 
 	// Convierte los grados en radianes
-	float deg2rad(float degrees);
+	float DegToRad(float degrees);
 };
