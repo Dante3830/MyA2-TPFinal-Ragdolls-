@@ -6,32 +6,32 @@ SFMLRenderer::SFMLRenderer(RenderWindow *window) {
 
 SFMLRenderer::~SFMLRenderer(void){}
 
-void SFMLRenderer::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) {
-	ConvexShape poligono;
-	poligono.setFillColor(Color(0, 0, 0, 0));
+void SFMLRenderer::DrawPolygon(const b2Vec2* vertexes, int32 vertexCount, const b2Color& color) {
+	ConvexShape poligon;
+	poligon.setFillColor(Color(0, 0, 0, 0));
 
-	poligono.setOutlineColor(box2d2SFMLColor(color));
+	poligon.setOutlineColor(box2d2SFMLColor(color));
 
-	poligono.setPointCount(vertexCount);
+	poligon.setPointCount(vertexCount);
 	for(int i = 0; i < vertexCount; ++i)
-		poligono.setPoint(i, Vector2f(vertices[i].x, vertices[i].y));
+		poligono.setPoint(i, Vector2f(vertexes[i].x, vertexes[i].y));
 
-	wnd->draw(poligono);
+	wnd->draw(poligon);
 }
 
-void SFMLRenderer::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) {
+void SFMLRenderer::DrawSolidPolygon(const b2Vec2* vertexes, int32 vertexCount, const b2Color& color) {
 
-	ConvexShape poligono;
-	poligono.setFillColor(box2d2SFMLColor(color));
+	ConvexShape poligon;
+	poligon.setFillColor(box2d2SFMLColor(color));
 
-	poligono.setOutlineColor(box2d2SFMLColor(color));
+	poligon.setOutlineColor(box2d2SFMLColor(color));
 
-	poligono.setPointCount(vertexCount);
+	poligon.setPointCount(vertexCount);
 
 	for(int i = 0; i < vertexCount; ++i)
-		poligono.setPoint(i, Vector2f(vertices[i].x, vertices[i].y));
+		poligon.setPoint(i, Vector2f(vertexes[i].x, vertexes[i].y));
 
-	wnd->draw(poligono);
+	wnd->draw(poligon);
 }
 
 void SFMLRenderer::DrawCircle(const b2Vec2& center, float radius, const b2Color& color) {
