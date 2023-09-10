@@ -13,7 +13,7 @@ Game::Game(int _width, int _height, string _title) : width(_width), height(_heig
 	InitGame();
 }
 
-float Game::deg2rad(float degrees) {
+float Game::DegToRad(float degrees) {
 	return degrees * 3.1415 / 180;
 }
 
@@ -42,8 +42,8 @@ void Game::InitElements() {
 	selectedObject = 1;
 
 	//floorBoxes = 0;
-	ragdolls = 0;
-	Ragdoll_On = false;
+	RagdollCount = 0;
+	RagdollOn = false;
 
 	// Tiempos
 	wait = 0.0f;
@@ -51,7 +51,7 @@ void Game::InitElements() {
 
 	SetZoom({ 19.f,19.f }, { 12.f, 12.f }, { 33.f, 77.f });
 
-	collission = false;
+	Collission = false;
 }
 
 void Game::SetZoom(Vector2f _Center, Vector2f _Size, Vector2f _Position) {
@@ -68,82 +68,82 @@ void Game::InitPhysics() {
 	World = new b2World(b2Vec2(0.0f, 9.8f));
 
 	// Creamos un piso y lo posicionamos
-	bdygrd_def.type = b2_staticBody;
-	bdygrd_def.position = b2Vec2(50.0f, 104.0f);
-	bdy_ground = World->CreateBody(&bdygrd_def);
+	BdyGrd_Def.type = b2_staticBody;
+	BdyGrd_Def.position = b2Vec2(50.0f, 104.0f);
+	Bdy_Ground = World->CreateBody(&BdyGrd_Def);
 
 	b2PolygonShape shp_grnd;
 	shp_grnd.SetAsBox(50.f, 2.5f);
 
-	fixgrd_def.shape = &shp_grnd;
-	fixgrd_def.density = 1.0f;
-	fixgrd_def.restitution = 0.0f;
-	fixgrd_def.friction = 0.3f;
+	FixGrd_Def.shape = &shp_grnd;
+	FixGrd_Def.density = 1.0f;
+	FixGrd_Def.restitution = 0.0f;
+	FixGrd_Def.friction = 0.3f;
 
-	fix_ground = bdy_ground->CreateFixture(&fixgrd_def);
+	Fix_Ground = Bdy_Ground->CreateFixture(&FixGrd_Def);
 
 	// Creando el cañon
-	bdycnyn_def.type = b2_staticBody;
-	bdycnyn_def.position = b2Vec2(47.f, 100.f);
-	bdy_canyon = World->CreateBody(&bdycnyn_def);
+	BdyCnyn_Def.type = b2_staticBody;
+	BdyCnyn_Def.position = b2Vec2(47.f, 100.f);
+	Bdy_Canyon = World->CreateBody(&BdyCnyn_Def);
 
 	b2PolygonShape shp_cnyn;
 	shp_cnyn.SetAsBox(0.8f, 0.8f);
 
-	fixcnyn_def.shape = &shp_cnyn;
-	fixcnyn_def.density = 1.f;
-	fixcnyn_def.restitution = 0.1f;
-	fixcnyn_def.friction = 0.3f;
+	FixCnyn_Def.shape = &shp_cnyn;
+	FixCnyn_Def.density = 1.f;
+	FixCnyn_Def.restitution = 0.1f;
+	FixCnyn_Def.friction = 0.3f;
 
-	fix_canyon = bdy_canyon->CreateFixture(&fixcnyn_def);
+	Fix_Canyon = Bdy_Canyon->CreateFixture(&FixCnyn_Def);
 
 	// Caja de victoria
-	bdyVicBox_def.type = b2_dynamicBody;
-	bdyVicBox_def.position = b2Vec2(55.f, 101.f);
-	bdy_victoryBox = World->CreateBody(&bdyVicBox_def);
+	BdyVicBox_Def.type = b2_dynamicBody;
+	BdyVicBox_Def.position = b2Vec2(55.f, 101.f);
+	Bdy_VictoryBox = World->CreateBody(&BdyVicBox_Def);
 
 	b2PolygonShape shp_VicBox;
 	shp_VicBox.SetAsBox(0.5f, 0.5f);
 
-	fixVicBox_def.shape = &shp_VicBox;
-	fixVicBox_def.density = 1.f;
-	fixVicBox_def.restitution = 0.1f;
-	fixVicBox_def.friction = 0.1f;
+	FixVicBox_Def.shape = &shp_VicBox;
+	FixVicBox_Def.density = 1.f;
+	FixVicBox_Def.restitution = 0.1f;
+	FixVicBox_Def.friction = 0.1f;
 
-	fix_victoryBox = bdy_victoryBox->CreateFixture(&fixVicBox_def);
+	Fix_VictoryBox = Bdy_VictoryBox->CreateFixture(&FixVicBox_Def);
 	
 }
 
 void Game::InitTextures() {
 	// Texturizando en cañón
-	canyon_tex = new Texture;
-	canyon_tex->loadFromFile("Assets/Canyon.png");
-	canyon_spr = new Sprite;
-	canyon_spr->setTexture(*canyon_tex);
+	Canyon_Tex = new Texture;
+	Canyon_Tex->loadFromFile("Assets/Canyon.png");
+	Canyon_Spr = new Sprite;
+	Canyon_Spr->setTexture(*Canyon_Tex);
 
-	fig_canyon = new RectangleShape();
+	Fig_Canyon = new RectangleShape();
 
-	_canyon = new SpriteRenderer(bdy_canyon, canyon_spr);
+	_Canyon = new SpriteRenderer(Bdy_Canyon, Canyon_Spr);
 
 	// Texturizando el piso
-	ground_tex = new Texture;
-	ground_tex->loadFromFile("Assets/Ground.png");
-	ground_spr = new Sprite;
-	ground_spr->setTexture(*ground_tex);
+	Ground_Tex = new Texture;
+	Ground_Tex->loadFromFile("Assets/Ground.png");
+	Ground_Spr = new Sprite;
+	Ground_Spr->setTexture(*Ground_Tex);
 
-	fig_ground = new RectangleShape();
+	Fig_Ground = new RectangleShape();
 
-	_ground = new SpriteRenderer(bdy_ground, ground_spr);
+	_Ground = new SpriteRenderer(Bdy_Ground, Ground_Spr);
 
 	// Texturizando la caja de victoria
-	VictoryBox_tex = new Texture;
-	VictoryBox_tex->loadFromFile("Assets/VictoryBox.png");
-	VictoryBox_spr = new Sprite;
-	VictoryBox_spr->setTexture(*VictoryBox_tex);
+	VictoryBox_Tex = new Texture;
+	VictoryBox_Tex->loadFromFile("Assets/VictoryBox.png");
+	VictoryBox_Spr = new Sprite;
+	VictoryBox_Spr->setTexture(*VictoryBox_Tex);
 
-	fig_victoryBox = new RectangleShape();
+	Fig_VictoryBox = new RectangleShape();
 
-	_victoryBox = new SpriteRenderer(bdy_victoryBox, VictoryBox_spr);
+	_VictoryBox = new SpriteRenderer(Bdy_VictoryBox, VictoryBox_Spr);
 }
 
 void Game::SelectPlay() {
@@ -178,7 +178,7 @@ void Game::UpdateCanyon() {
 	mousePos = Mouse::getPosition(*wnd);
 	mousePosCoord = wnd->mapPixelToCoords(mousePos);
 
-	bdy_canyon->SetTransform(bdy_canyon->GetPosition(), atan2f(mousePosCoord.y - bdy_canyon->GetPosition().y, mousePosCoord.x - bdy_canyon->GetPosition().x));
+	Bdy_Canyon->SetTransform(Bdy_Canyon->GetPosition(), atan2f(mousePosCoord.y - Bdy_Canyon->GetPosition().y, mousePosCoord.x - Bdy_Canyon->GetPosition().x));
 }
 
 void Game::UpdateRagdoll() {
@@ -187,13 +187,13 @@ void Game::UpdateRagdoll() {
 	mousePos = Mouse::getPosition(*wnd);
 	mousePosCoord = wnd->mapPixelToCoords(mousePos);
 
-	if (level > 0 && ragdolls < 5) {
-		Ragdoll_On = true;
+	if (level > 0 && RagdollCount < 5) {
+		RagdollOn = true;
 
-		if (ragdolls < 5) {
-			RagdollNumber[ragdolls] = new Ragdoll({ bdy_canyon->GetPosition().x + 0.5f, bdy_canyon->GetPosition().y - 2.f }, *World);
-			RagdollNumber[ragdolls]->ApplyForce({ mousePosCoord.x - bdy_canyon->GetPosition().x, mousePosCoord.y - bdy_canyon->GetPosition().y });
-			ragdolls++;
+		if (RagdollCount < 5) {
+			RagdollNumber[RagdollCount] = new Ragdoll({ Bdy_Canyon->GetPosition().x + 0.5f, Bdy_Canyon->GetPosition().y - 2.f }, *World);
+			RagdollNumber[RagdollCount]->ApplyForce({ mousePosCoord.x - Bdy_Canyon->GetPosition().x, mousePosCoord.y - Bdy_Canyon->GetPosition().y });
+			RagdollCount++;
 		}
 
 	}
@@ -210,10 +210,10 @@ void Game::DoEvents() {
 		
 		case Event::KeyPressed:
 			//if (Keyboard::isKeyPressed(Keyboard::Left)) {
-			//	bdy_canyon->SetTransform(bdy_canyon->GetPosition(), bdy_canyon->GetAngle() + deg2rad(3));
+			//	Bdy_Canyon->SetTransform(Bdy_Canyon->GetPosition(), Bdy_Canyon->GetAngle() + deg2rad(3));
 			//}
 			//else if (Keyboard::isKeyPressed(Keyboard::Right)) {
-			//	bdy_canyon->SetTransform(bdy_canyon->GetPosition(), bdy_canyon->GetAngle() + deg2rad(-3));
+			//	Bdy_Canyon->SetTransform(Bdy_Canyon->GetPosition(), Bdy_Canyon->GetAngle() + deg2rad(-3));
 			//}
 			if (evt->key.code == Keyboard::Up) {
 				SelectPlay();
@@ -293,11 +293,11 @@ void Game::Loop() {
 
 		DrawTheGame();
 		
-		gameStateCond();
+		GameState();
 	}
 }
 
-void Game::gameStateCond() {
+void Game::GameState() {
 	if (state == 1) {
 		*time1 = clock->getElapsedTime();
 		if (time2 + frameTime < time1->asSeconds()) {
@@ -307,7 +307,7 @@ void Game::gameStateCond() {
 
 			CheckCollitions();
 
-			Conditions();
+			CheckWinningCondition();
 		}
 	}
 
@@ -317,8 +317,8 @@ void Game::gameStateCond() {
 	}
 }
 
-void Game::Conditions() {
-	if (collission == true) {
+void Game::CheckWinningCondition() {
+	if (Collission == true) {
 		level++;
 		state = 3;
 
@@ -326,7 +326,7 @@ void Game::Conditions() {
 			state = 5;
 		}
 		else {
-			ragdolls = 0;
+			RagdollCount = 0;
 			offSetX = 0;
 			offSetY = 0;
 			InitGame();
@@ -336,16 +336,19 @@ void Game::Conditions() {
 
 void Game::CheckCollitions() {
 
-	for (int i = 0; i < ragdolls; i++) {
+	for (int RagdollIndex = 0; RagdollIndex < RagdollCount; RagdollIndex++) {
 		// Bounding box de la caja de victoria
-		FloatRect victoryBounds = fig_victoryBox->getGlobalBounds();
+		FloatRect victoryBounds = Fig_VictoryBox->getGlobalBounds();
 
-		const Vector2f ragdollPos = RagdollNumber[i]->GetPosition(i);
-		const Vector2f ragdollSize = RagdollNumber[i]->GetSize(i);
-		FloatRect ragdollBounds = FloatRect(ragdollPos, ragdollSize);
+		for (int partIndex = 0; partIndex < 6; partIndex++) {
+			const Vector2f ragdollPos = RagdollNumber[RagdollIndex]->GetPosition(partIndex);
+		
+			const Vector2f ragdollSize = RagdollNumber[RagdollIndex]->GetSize(RagdollIndex);
+			FloatRect ragdollBounds = FloatRect(ragdollPos, ragdollSize);
 
-		if (victoryBounds.intersects(ragdollBounds)) {
-			collission = true;
+			if (victoryBounds.intersects(ragdollBounds)) {
+				Collission = true;
+			}
 		}
 
 	}
@@ -358,18 +361,17 @@ void Game::DrawTheGame() {
 	wnd->clear();
 	
 	// Dibuja la escena
-	levelProcessor->Draw(wnd, state, level, ragdolls);
+	levelProcessor->Draw(wnd, state, level, RagdollCount);
 
 	// Cuando comienza el juego
 	if (state == 1) {
-		levelProcessor->Draw(wnd, state, level, ragdolls);
 
-		_ground->Draw(wnd);
-		_canyon->Draw(wnd);
-		_victoryBox->Draw(wnd);
+		_Ground->Draw(wnd);
+		_Canyon->Draw(wnd);
+		_VictoryBox->Draw(wnd);
 
-		for (int i = 0; i < ragdolls; i++) {
-			if (!RagdollNumber[i] || Ragdoll_On == true) {
+		for (int i = 0; i < RagdollCount; i++) {
+			if (!RagdollNumber[i] || RagdollOn == true) {
 				RagdollNumber[i]->Draw(wnd);
 			}
 		}
