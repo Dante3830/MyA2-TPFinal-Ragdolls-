@@ -17,10 +17,10 @@ public:
 	inline Color box2d2SFMLColor(const b2Color &_color);
 	
 	// Dibuja polígono
-	void DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) override;
+	void DrawPolygon(const b2Vec2* vertexes, int32 vertexCount, const b2Color& color) override;
 	
 	// Dibuja polígono sólido
-	void DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) override;
+	void DrawSolidPolygon(const b2Vec2* vertexes, int32 vertexCount, const b2Color& color) override;
 	
 	// Dibuja círculo
 	void DrawCircle(const b2Vec2& center, float radius, const b2Color& color) override;
