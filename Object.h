@@ -29,6 +29,6 @@ public:
 	FloatRect BoxObject();
 
 	// Convierte los radianes en grados
-	float RadToDeg(float rads);
+	float RadToDeg(float radians);
 
 };
