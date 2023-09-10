@@ -9,6 +9,8 @@
 using namespace sf;
 using namespace std;
 
+enum RagdollBodyPart { Head = 0, Torso = 1, LeftArm = 2, RightArm = 3, LeftLeg = 4, RightLeg = 5};
+
 class Ragdoll {
 private:
 	// Definiendo al ragdoll y sus partes
@@ -33,15 +35,17 @@ public:
 	void Draw(RenderWindow* wnd);
 
 	// Aplica la fuerza al cañón para disparar
-	void applyForce(Vector2f _mousePos);
+	void ApplyForce(Vector2f _mousePos);
 
 	//FloatRect getCloneBounds();
 
+	// Devuelve la posicion del ragdoll
 	Vector2f GetPosition(int i);
 
+	// Devuelve el tamanio
 	Vector2f GetSize(int i) const;
 
 	// Transforma los radianes en grados
-	float rad2deg(float grados);
+	float RadToDeg(float degrees);
 
 };
