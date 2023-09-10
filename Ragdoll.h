@@ -14,18 +14,18 @@ enum RagdollBodyPart { Head = 0, Torso = 1, LeftArm = 2, RightArm = 3, LeftLeg =
 class Ragdoll {
 private:
 	// Definiendo al ragdoll y sus partes
-	RectangleShape* shape_rag[6];
-	Object* ragd[6];
+	RectangleShape* Shape_Rag[6];
+	Object* Ragd[6];
 
 	// Definiendo al cuerpo y fixture del ragdoll
-	b2Body* bdy_rag[6];
-	b2BodyDef bdyDef_rag[6];
-	b2Fixture* fix_rag[6];
-	b2FixtureDef fixDef_rag[6];
+	b2Body* Bdy_Rag[6];
+	b2BodyDef BdyDef_Rag[6];
+	b2Fixture* Fix_Rag[6];
+	b2FixtureDef FixDef_Rag[6];
 
 	// Definimos sus resortes
-	b2DistanceJoint* jointRag[5];
-	b2DistanceJointDef jointRagDef[5];
+	b2DistanceJoint* JointRag[5];
+	b2DistanceJointDef JointRagDef[5];
 
 public:
 	// Constructor
