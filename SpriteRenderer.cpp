@@ -1,34 +1,34 @@
 #include "SpriteRenderer.h"
 
 SpriteRenderer::SpriteRenderer(b2Body* _object, Sprite* _sprite) {
-	bdy_object = _object;
-	spr_object = _sprite;
+	Bdy_Object = _object;
+	Spr_Object = _sprite;
 
-	SpritePos = bdy_object->GetPosition();
+	SpritePos = Bdy_Object->GetPosition();
 
 	// Dimensiones maximas
-	dims.upperBound = b2Vec2(-FLT_MAX, -FLT_MAX);
-	dims.lowerBound = b2Vec2(FLT_MAX, FLT_MAX);
+	Dims.upperBound = b2Vec2(-FLT_MAX, -FLT_MAX);
+	Dims.lowerBound = b2Vec2(FLT_MAX, FLT_MAX);
 
-	for (b2Fixture* f = bdy_object->GetFixtureList(); f; f = f->GetNext()) {
-		dims = f->GetAABB(0);
+	for (b2Fixture* f = Bdy_Object->GetFixtureList(); f; f = f->GetNext()) {
+		Dims = f->GetAABB(0);
 	}
 
-	spr_object->setOrigin(spr_object->getTexture()->getSize().x / 2.0f, spr_object->getTexture()->getSize().y / 2.0f);
-	spr_object->setPosition(SpritePos.x, SpritePos.y);
-	spr_object->setRotation(rad2deg(bdy_object->GetAngle()));
-	spr_object->setScale(dims.GetExtents().x * 2.0f / spr_object->getTexture()->getSize().x, dims.GetExtents().y * 2.0f / spr_object->getTexture()->getSize().y);
+	Spr_Object->setOrigin(Spr_Object->getTexture()->getSize().x / 2.0f, Spr_Object->getTexture()->getSize().y / 2.0f);
+	Spr_Object->setPosition(SpritePos.x, SpritePos.y);
+	Spr_Object->setRotation(RadToDeg(Bdy_Object->GetAngle()));
+	Spr_Object->setScale(Dims.GetExtents().x * 2.0f / Spr_Object->getTexture()->getSize().x, Dims.GetExtents().y * 2.0f / Spr_Object->getTexture()->getSize().y);
 }
 
 void SpriteRenderer::Draw(RenderWindow* _window) {
-	SpritePos = bdy_object->GetPosition();
+	SpritePos = Bdy_Object->GetPosition();
 
-	spr_object->setPosition(SpritePos.x, SpritePos.y);
-	spr_object->setRotation(rad2deg(bdy_object->GetAngle()));
+	Spr_Object->setPosition(SpritePos.x, SpritePos.y);
+	Spr_Object->setRotation(RadToDeg(Bdy_Object->GetAngle()));
 
-	_window->draw(*spr_object);
+	_window->draw(*Spr_Object);
 }
 
-float SpriteRenderer::rad2deg(float rads) {
-	return rads * 180 / 3.14f;
+float SpriteRenderer::RadToDeg(float _radians) {
+	return _radians * 180 / 3.14f;
 }
