@@ -17,12 +17,12 @@ private:
 	Texture* level_tex[5];
 	Sprite* level_spr[5];
 
-	Text* main[MENU];	//instancia texto para el menu
-	Text* level;		//texto para cada nivel de juego			
-	Text* ragdolls;		//intancia texto par amostrar cantidad de ragdoll
+	Text* main[MENU]; //instancia texto para el menu
+	Text* level; //texto para cada nivel de juego			
+	Text* ragdolls;	//intancia texto par amostrar cantidad de ragdoll
 	// Mensaje del juego
 	Text* message;
-	Text* exit;			//texto play
+	Text* exit;	//texto play
 
 	// Fuente de letra a utilizar
 	Font* font;
@@ -44,10 +44,10 @@ public:
 	// Inicializa las texturas y textos
 	void InitTextAndLevels();
 
-	//Mueve el selector hacia arriba
+	// Mueve el selector hacia arriba
 	void MoveUpMenu();
 
-	//Mueve el selector hacia abajo
+	// Mueve el selector hacia abajo
 	void MoveDownMenu();
 
 	// Dibuja las texturas y texto
