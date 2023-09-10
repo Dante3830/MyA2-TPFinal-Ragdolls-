@@ -16,7 +16,7 @@ Ragdoll::Ragdoll(Vector2f pos, b2World& World) {
 	//Posicionando el ragdoll
 	// Cabeza
 	bdyDef_rag[0].position = b2Vec2(pos.x, pos.y + 0.1f);
-	// Cuerpo
+	// Torso
 	bdyDef_rag[1].position = b2Vec2(pos.x, pos.y + 0.65f);
 	// Brazo Izq
 	bdyDef_rag[2].position = b2Vec2(pos.x - 0.32f, pos.y + 0.5f);
@@ -85,7 +85,7 @@ Ragdoll::Ragdoll(Vector2f pos, b2World& World) {
 
 }
 
-float Ragdoll::Rad2Deg(float radians) {
+float Ragdoll::RadToDeg(float radians) {
 	return radians * 180 / 3.1415;
 }
 
