@@ -1,34 +1,34 @@
 #include "Object.h"
 
-Object::Object(b2Body* _body, RectangleShape* _figure): bdy_ragdoll(_body), fig_ragdoll(_figure) 
+Object::Object(b2Body* _body, RectangleShape* _figure): Bdy_Object(_body), Fig_Object(_figure) 
 {
-	pos = _body->GetPosition();
+	Pos = _body->GetPosition();
 
-	dims.upperBound = b2Vec2(-FLT_MAX, -FLT_MAX);
-	dims.lowerBound = b2Vec2(FLT_MAX, FLT_MAX);
+	Dims.upperBound = b2Vec2(-FLT_MAX, -FLT_MAX);
+	Dims.lowerBound = b2Vec2(FLT_MAX, FLT_MAX);
 
-	for (b2Fixture* i = bdy_ragdoll->GetFixtureList(); i; i = i->GetNext()) {
-		dims = i->GetAABB(0);
+	for (b2Fixture* i = Bdy_Object->GetFixtureList(); i; i = i->GetNext()) {
+		Dims = i->GetAABB(0);
 	}
 
-	fig_ragdoll->setSize({ dims.GetExtents().x * 2, dims.GetExtents().y * 2 });
-	fig_ragdoll->setOrigin(fig_ragdoll->getSize().x / 2.f, fig_ragdoll->getSize().y / 2.f);
-	fig_ragdoll->setPosition(pos.x, pos.y);
-	fig_ragdoll->setRotation(rad2deg(bdy_ragdoll->GetAngle()));
+	Fig_Object->setSize({ Dims.GetExtents().x * 2, Dims.GetExtents().y * 2 });
+	Fig_Object->setOrigin(Fig_Object->getSize().x / 2.f, Fig_Object->getSize().y / 2.f);
+	Fig_Object->setPosition(Pos.x, Pos.y);
+	Fig_Object->setRotation(RadToDeg(Bdy_Object->GetAngle()));
 }
 
 void Object::Draw(RenderWindow* window) {
-	pos = bdy_ragdoll->GetPosition();
-	fig_ragdoll->setPosition(pos.x, pos.y);
-	fig_ragdoll->setRotation(rad2deg(bdy_ragdoll->GetAngle()));
-	window->draw(*fig_ragdoll);
+	Pos = Bdy_Object->GetPosition();
+	Fig_Object->setPosition(Pos.x, Pos.y);
+	Fig_Object->setRotation(RadToDeg(Bdy_Object->GetAngle()));
+	window->draw(*Fig_Object);
 }
 
-FloatRect Object::BoxRagdoll() {
-	FloatRect boundingBox = fig_ragdoll->getGlobalBounds();
-	return boundingBox;
+FloatRect Object::BoxObject() {
+	FloatRect BoundingBox = Fig_Object->getGlobalBounds();
+	return BoundingBox;
 }
 
-float Object::rad2deg(float rads) {
-	return rads * 180 / 3.1415f;
+float Object::RadToDeg(float radians) {
+	return radians * 180 / 3.1415f;
 }
