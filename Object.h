@@ -4,19 +4,19 @@
 using namespace sf;
 using namespace std;
 
-enum EnumRagdoll{ground, canyon, dynamicBox, stoppedBox};
+enum EnumRagdoll{Ground, Canyon, DynamicBox, stoppedBox};
 
 class Object {
 private:
 	// Objetos del ragdoll
-	b2Body* bdy_ragdoll;
-	RectangleShape* fig_ragdoll;
+	b2Body* Bdy_Object;
+	RectangleShape* Fig_Object;
 
 	// Dimensiones y posición del ragdoll
-	b2AABB dims;
-	b2Vec2 pos;
+	b2AABB Dims;
+	b2Vec2 Pos;
 
-	EnumRagdoll type;
+	EnumRagdoll Type;
 
 public:
 	// Constructor de la clase
@@ -26,9 +26,9 @@ public:
 	void Draw(RenderWindow* window);
 
 	// Devuelve el bounding box de la figura
-	FloatRect BoxRagdoll();
+	FloatRect BoxObject();
 
 	// Convierte los radianes en grados
-	float rad2deg(float rads);
+	float RadToDeg(float rads);
 
 };
