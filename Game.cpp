@@ -322,7 +322,7 @@ void Game::CheckWinningCondition() {
 		level++;
 		state = 3;
 
-		if (state == 3) {
+		if (level > 3) {
 			state = 5;
 		}
 		else {
