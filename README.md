@@ -1,4 +1,4 @@
-# MyA2-TPFinal-Ragdolls- (ACTUALIZADO)
+# MyA2-TPFinal-Ragdolls-
 
 Fuentes utilizadas para realizar el Trabajo Práctico Final:
 
